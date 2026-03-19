@@ -5,9 +5,13 @@
   "keywords": ["react", "drawer", "bottom-sheet", "gesture", "animation", "accessible"],
   "license": "MIT",
   "author": "Ozer Gokalp Sezer",
+  "homepage": "https://hiraki.ozergklp.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/ddoemonn/hiraki"
+  },
+  "bugs": {
+    "url": "https://github.com/ddoemonn/hiraki/issues"
   },
   "sideEffects": false,
   "type": "module",
