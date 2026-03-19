@@ -17,7 +17,7 @@ export async function HeadlessShowcase() {
             The homepage only shows one stronger example here so the rest of the landing can stay minimal.
           </p>
           <div className="mt-5 flex flex-wrap gap-2">
-            {['accessible', 'headless', 'unstyled', 'redesignable'].map((item) => (
+            {['accessible', 'behavior-first', 'bring your own styles', 'redesignable'].map((item) => (
               <CodeBadge key={item} code={item} compact />
             ))}
           </div>

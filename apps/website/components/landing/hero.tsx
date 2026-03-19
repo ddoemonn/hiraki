@@ -27,8 +27,8 @@ export function Hero() {
         </p>
 
         <p className="text-sm text-dim max-w-2xl mb-8 leading-relaxed">
-          Accessible, headless, unstyled primitives. Keep the behavior, redesign the surface,
-          and make the drawer feel native to your product instead of ours.
+          Behavior-first primitives. No CSS file, no classNames. Style with Tailwind, CSS variables,
+          or the style prop. Keep the behavior, redesign the surface.
         </p>
 
         <HeroDemo />

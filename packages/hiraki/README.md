@@ -140,7 +140,7 @@ The drawer starts at the largest snap point. Velocity on release determines whet
 
 ## Styling
 
-Hiraki is headless. It renders unstyled HTML elements. Add your own classes:
+Hiraki ships no CSS file or classNames. Style with Tailwind, CSS variables, or the `style` prop:
 
 ```tsx
 <Drawer.Content className="bg-white rounded-t-2xl shadow-xl">

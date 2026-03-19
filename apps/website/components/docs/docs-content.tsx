@@ -166,7 +166,7 @@ export const subcomponentRows: { component: string; props: PropRow[] }[] = [
 export function DocsIntroBadges() {
   return (
     <div className="mt-6 flex flex-wrap gap-2">
-      {['accessible', 'headless', 'unstyled', 'redesignable'].map((item) => (
+      {['accessible', 'behavior-first', 'bring your own styles', 'redesignable'].map((item) => (
         <CodeBadge key={item} code={item} />
       ))}
     </div>

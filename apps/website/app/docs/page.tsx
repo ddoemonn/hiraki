@@ -48,8 +48,8 @@ export default function DocsOverviewPage() {
           'accessible',
           'focus trap',
           'snap points',
-          'unstyled',
-          'headless',
+          'behavior-first',
+          'bring your own styles',
           'redesignable',
         ].map((item) => (
           <CodeBadge key={item} code={item} />

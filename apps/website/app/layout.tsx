@@ -8,6 +8,22 @@ export const metadata: Metadata = {
   title: 'hiraki',
   description:
     'The most capable React drawer component. All 4 directions, velocity-aware gestures, snap points, zero dependencies.',
+  openGraph: {
+    title: 'hiraki',
+    description:
+      'The most capable React drawer component. All 4 directions, velocity-aware gestures, snap points, zero dependencies.',
+    url: 'https://hiraki.ozergklp.com',
+    siteName: 'hiraki',
+    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'hiraki',
+    description:
+      'The most capable React drawer component. All 4 directions, velocity-aware gestures, snap points, zero dependencies.',
+    images: ['/og-image.png'],
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
