@@ -3,12 +3,12 @@ import { editorialStyleExample } from '@/components/docs/docs-content'
 import { CodeBadge } from '@/components/ui/code-badge'
 import { CodeBlock } from '@/components/ui/code-block'
 
-export async function HeadlessShowcase() {
+export async function StyleShowcase() {
   return (
     <section className="w-full border-b border-line">
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-16">
         <div className="mb-10 max-w-3xl">
-          <p className="mb-2 text-xs font-mono text-dim">headless</p>
+          <p className="mb-2 text-xs font-mono text-dim">styling</p>
           <h2 className="mb-4 text-2xl font-bold text-fg md:text-3xl">
             Same primitive, different product voice
           </h2>

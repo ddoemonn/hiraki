@@ -1,7 +1,7 @@
 import { Hero } from '@/components/landing/hero'
 import { FeaturesGrid } from '@/components/landing/features-grid'
 import { CodeShowcase } from '@/components/landing/code-showcase'
-import { HeadlessShowcase } from '@/components/landing/headless-showcase'
+import { StyleShowcase } from '@/components/landing/style-showcase'
 import { VariantShowcase } from '@/components/landing/variant-showcase'
 import { DirectionShowcase } from '@/components/landing/direction-showcase'
 import { SnapDemo } from '@/components/landing/snap-demo'
@@ -13,7 +13,7 @@ export default function Page() {
       <Hero />
       <FeaturesGrid />
       <CodeShowcase />
-      <HeadlessShowcase />
+      <StyleShowcase />
       <VariantShowcase />
       <DirectionShowcase />
       <SnapDemo />

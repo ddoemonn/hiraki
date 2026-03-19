@@ -32,7 +32,7 @@ export function DocsSidebar() {
         <p className="text-xs font-mono text-dim">hiraki/docs</p>
         <h1 className="mt-2 text-2xl font-bold tracking-tight text-fg">Documentation</h1>
         <p className="mt-3 text-sm leading-relaxed text-muted">
-          Accessible drawer primitives. Headless by default. Made to be redesigned.
+          Accessible drawer primitives. Bring your own styles. Made to be redesigned.
         </p>
       </div>
 

@@ -5,13 +5,13 @@ import { DocsPageFrame } from '@/components/docs/docs-page-frame'
 import { CodeBlock } from '@/components/ui/code-block'
 
 export const metadata: Metadata = {
-  title: 'Headless Styling | Hiraki Docs',
+  title: 'Styling | Hiraki Docs',
 }
 
-export default async function DocsHeadlessStylingPage() {
+export default async function DocsStylingPage() {
   return (
     <DocsPageFrame
-      eyebrow="headless"
+      eyebrow="styling"
       title="Same primitive, different Tailwind styling"
       description="This is the part that needs to be obvious. The two previews below use the same Hiraki primitives, but the Tailwind styling language is completely different."
     >

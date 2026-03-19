@@ -4,7 +4,7 @@ export const docsNav = [
   { href: '/docs', label: 'Overview' },
   { href: '/docs/installation', label: 'Installation' },
   { href: '/docs/quick-start', label: 'Quick start' },
-  { href: '/docs/headless-styling', label: 'Headless styling' },
+  { href: '/docs/styling', label: 'Styling' },
   { href: '/docs/behavior', label: 'Behavior' },
   { href: '/docs/api', label: 'API' },
 ] as const
@@ -45,7 +45,7 @@ export function SoftSheet() {
           <div className="space-y-5 p-6">
             <Drawer.Title className="text-lg font-semibold">Checkout summary</Drawer.Title>
             <Drawer.Description className="text-sm text-zinc-600">
-              Soft product styling on top of headless primitives.
+              Soft product styling on top of the primitives.
             </Drawer.Description>
           </div>
         </Drawer.Content>

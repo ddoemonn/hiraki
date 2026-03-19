@@ -61,7 +61,7 @@ export function BasicDocsPreview() {
   )
 }
 
-export function HeadlessStylesPreview() {
+export function StylesPreview() {
   return (
     <div className="grid gap-4 lg:grid-cols-2">
       <SoftStylePreviewCard />
@@ -107,7 +107,7 @@ export function SoftStylePreviewCard() {
                 <div>
                   <Drawer.Title className="text-lg font-semibold">Preferences</Drawer.Title>
                   <Drawer.Description className="mt-1 text-sm text-zinc-600">
-                    Soft, bright, product UI styling applied on top of headless behavior.
+                    Soft, bright, product UI styling applied on top of the primitives.
                   </Drawer.Description>
                 </div>
                 <div className="grid gap-3">
@@ -177,7 +177,7 @@ export function EditorialStylePreviewCard() {
                     Issue 04
                   </Drawer.Title>
                   <Drawer.Description className="mt-3 max-w-xs text-2xl font-semibold leading-tight text-orange-50">
-                    A headless drawer can still feel loud and opinionated after styling.
+                    A styled drawer can still feel loud and opinionated.
                   </Drawer.Description>
                 </div>
                 <div className="flex-1 space-y-4 overflow-y-auto px-6 py-6">
