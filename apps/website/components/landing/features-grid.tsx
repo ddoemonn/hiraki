@@ -19,7 +19,7 @@ const features = [
   {
     icon: Package2,
     title: 'Zero dependencies',
-    description: 'React is the only peer dep. No Radix, no Framer Motion, nothing else. ~6 KB gzipped.',
+    description: 'React is the only peer dep. No Radix, no Framer Motion, nothing else. ~10 KB gzipped.',
   },
   {
     icon: Eye,
@@ -36,7 +36,7 @@ const features = [
 export function FeaturesGrid() {
   return (
     <section className="w-full border-b border-line">
-      <div className="max-w-4xl mx-auto px-6 py-16">
+      <div className="max-w-4xl mx-auto px-4 py-10 sm:px-6 sm:py-16">
         <div className="overflow-hidden rounded-[var(--hiraki-radius)] border border-line bg-surface">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3">
           {features.map((f) => {

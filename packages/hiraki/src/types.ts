@@ -59,6 +59,8 @@ export interface DrawerOverlayProps extends React.HTMLAttributes<HTMLDivElement>
 export interface DrawerHandleProps extends React.HTMLAttributes<HTMLDivElement> {
   /** When true, only dragging the handle initiates gesture */
   handleOnly?: boolean
+  /** Controls whether the handle is rendered */
+  visible?: boolean
 }
 
 export interface DrawerTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {

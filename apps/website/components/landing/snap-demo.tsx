@@ -40,7 +40,7 @@ export function SnapDemo() {
 
   return (
     <section className="w-full border-b border-line">
-      <div className="max-w-4xl mx-auto px-6 py-16">
+      <div className="max-w-4xl mx-auto px-4 py-10 sm:px-6 sm:py-16">
         <p className="text-xs font-mono text-dim mb-2">snapPoints</p>
         <h2 className="text-2xl font-bold text-fg mb-4">Snap points</h2>
         <p className="text-sm text-muted max-w-lg mb-6 leading-relaxed">

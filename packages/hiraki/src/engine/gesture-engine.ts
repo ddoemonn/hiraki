@@ -26,6 +26,10 @@ export function isHorizontal(direction: Direction): boolean {
   return direction === 'left' || direction === 'right'
 }
 
+function getDirectionSign(direction: Direction): number {
+  return direction === 'top' || direction === 'left' ? -1 : 1
+}
+
 export function shouldDrag(
   target: EventTarget | null,
   direction: Direction,
@@ -44,6 +48,9 @@ export function shouldDrag(
 function getScrollParent(el: Element, horizontal: boolean): Element | null {
   let current: Element | null = el
   while (current) {
+    if (current === document.body || current === document.documentElement) {
+      return null
+    }
     const style = window.getComputedStyle(current)
     const overflow = horizontal
       ? `${style.overflowX} ${style.overflow}`
@@ -73,12 +80,14 @@ export function createGestureEngine(options: GestureEngineOptions) {
 
   function getDelta(): number {
     const state = tracker.getState()
-    return isHorizontal(opts.direction) ? state.deltaX : state.deltaY
+    const delta = isHorizontal(opts.direction) ? state.deltaX : state.deltaY
+    return delta * getDirectionSign(opts.direction)
   }
 
   function getVelocity(): number {
     const state = tracker.getState()
-    return isHorizontal(opts.direction) ? state.velocityX : state.velocityY
+    const velocity = isHorizontal(opts.direction) ? state.velocityX : state.velocityY
+    return velocity * getDirectionSign(opts.direction)
   }
 
   function clampWithRubberBand(raw: number): number {
@@ -130,6 +139,7 @@ export function createGestureEngine(options: GestureEngineOptions) {
     }
     isDragging = false
     const velocityPxMs = getVelocity() * 1000
+    const snapVelocityPxMs = -velocityPxMs
     const closeThresholdPx = opts.closeThreshold * opts.maxTranslate
     const shouldClose = translateValue > closeThresholdPx
     let targetSnapIndex: number
@@ -138,7 +148,7 @@ export function createGestureEngine(options: GestureEngineOptions) {
     } else {
       targetSnapIndex = findNearestSnapPoint(
         opts.maxTranslate - translateValue,
-        velocityPxMs,
+        snapVelocityPxMs,
         opts.snapPoints,
         opts.inertia,
       )

@@ -19,7 +19,7 @@ export function VariantShowcase() {
 
   return (
     <section className="w-full border-b border-line">
-      <div className="max-w-4xl mx-auto px-6 py-16">
+      <div className="max-w-4xl mx-auto px-4 py-10 sm:px-6 sm:py-16">
         <p className="text-xs font-mono text-dim mb-2">variants</p>
         <h2 className="text-2xl font-bold text-fg mb-8">6 visual modes, one API</h2>
 

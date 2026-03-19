@@ -92,11 +92,30 @@ export function getContentStyle(
     }
   }
 
-  if (config.borderRadius != null) {
-    style.borderRadius =
-      config.borderRadius === 0
-        ? 0
-        : `var(--hiraki-radius, ${config.borderRadius}px)`
+  if (config.borderRadius != null && config.borderRadius > 0) {
+    const r = `var(--hiraki-radius, ${config.borderRadius}px)`
+    if (config.margin) {
+      style.borderRadius = r
+    } else {
+      switch (direction) {
+        case 'bottom':
+          style.borderTopLeftRadius = r
+          style.borderTopRightRadius = r
+          break
+        case 'top':
+          style.borderBottomLeftRadius = r
+          style.borderBottomRightRadius = r
+          break
+        case 'left':
+          style.borderTopRightRadius = r
+          style.borderBottomRightRadius = r
+          break
+        case 'right':
+          style.borderTopLeftRadius = r
+          style.borderBottomLeftRadius = r
+          break
+      }
+    }
   }
 
   return style

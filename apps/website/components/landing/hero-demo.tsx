@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { Github, ArrowRight } from 'lucide-react'
 import { Drawer } from 'hiraki'
 import { Button } from '@/components/ui/button'
@@ -16,14 +17,19 @@ export function HeroDemo() {
           Open demo
           <ArrowRight className="w-4 h-4" />
         </Button>
+        <Link
+          href="/docs"
+          className="inline-flex h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-[var(--hiraki-radius)] px-5 text-sm font-medium text-muted transition-colors hover:text-fg"
+          style={{ border: '1px solid var(--code-border-strong)', background: 'var(--code-bg)', boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05)' }}
+        >
+          Docs
+        </Link>
         <a
           href="https://github.com/ozergokalpsezer/hiraki"
           target="_blank"
           rel="noreferrer"
-          className={cn(
-            'inline-flex h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-[var(--hiraki-radius)]',
-            'border border-line px-5 text-sm font-medium text-muted transition-colors hover:border-elevated hover:text-fg',
-          )}
+          className="inline-flex h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-[var(--hiraki-radius)] px-5 text-sm font-medium text-muted transition-colors hover:text-fg"
+          style={{ border: '1px solid var(--code-border-strong)', background: 'var(--code-bg)', boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05)' }}
         >
           <Github className="w-4 h-4" />
           GitHub
@@ -52,7 +58,7 @@ function DemoDrawerContent() {
       <div className="flex flex-col gap-4 p-6 overflow-y-auto">
         <div>
           <Drawer.Title className="text-base font-semibold text-fg font-mono">
-            hiraki — bottom drawer
+            hiraki bottom drawer
           </Drawer.Title>
           <Drawer.Description className="text-sm text-dim mt-1">
             Drag up and down. Release with velocity to snap or dismiss.

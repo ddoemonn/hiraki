@@ -31,7 +31,10 @@ export const SnapIndicator = forwardRef<HTMLDivElement, DrawerSnapIndicatorProps
               width: 6,
               height: 6,
               borderRadius: '50%',
-              backgroundColor: i === activeSnapIndex ? 'currentColor' : 'rgba(0,0,0,0.2)',
+              backgroundColor:
+                i === activeSnapIndex
+                  ? 'var(--hiraki-snap-active, currentColor)'
+                  : 'var(--hiraki-snap-inactive, rgba(120, 120, 128, 0.32))',
               transition: 'background-color 200ms ease',
             }}
           />

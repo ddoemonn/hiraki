@@ -5,15 +5,15 @@ import { ThemeToggle } from '@/components/ui/theme-toggle'
 export function Hero() {
   return (
     <section className="w-full border-b border-line">
-      <div className="max-w-4xl mx-auto px-6 py-20 md:py-28">
+      <div className="max-w-4xl mx-auto px-4 py-14 sm:px-6 sm:py-20 md:py-28">
         <div className="mb-10 flex justify-end">
           <ThemeToggle />
         </div>
 
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-fg leading-[1] mb-2">
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight text-fg leading-[1] mb-2">
           hiraki
         </h1>
-        <p className="text-2xl md:text-3xl font-light text-dim mb-1 font-sans">
+        <p className="text-xl sm:text-2xl md:text-3xl font-light text-dim mb-1 font-sans">
           開き
         </p>
         <p className="text-sm text-dim font-mono mb-8">
@@ -26,12 +26,17 @@ export function Hero() {
           Framer Motion, or any external runtime dependencies.
         </p>
 
+        <p className="text-sm text-dim max-w-2xl mb-8 leading-relaxed">
+          Accessible, headless, unstyled primitives. Keep the behavior, redesign the surface,
+          and make the drawer feel native to your product instead of ours.
+        </p>
+
         <HeroDemo />
 
         <TerminalBlock
           command="pnpm add hiraki"
           label="install.sh"
-          className="w-full max-w-sm"
+          className="w-full sm:max-w-sm"
         />
       </div>
     </section>

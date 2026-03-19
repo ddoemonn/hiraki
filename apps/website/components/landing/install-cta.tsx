@@ -4,7 +4,7 @@ import { TerminalBlock } from '@/components/ui/terminal-block'
 export function InstallCta() {
   return (
     <section className="w-full">
-      <div className="max-w-4xl mx-auto px-6 py-16">
+      <div className="max-w-4xl mx-auto px-4 py-10 sm:px-6 sm:py-16">
         <p className="text-xs font-mono text-dim mb-2">get started</p>
         <h2 className="text-2xl font-bold text-fg mb-6">Open source, free forever</h2>
         <p className="text-sm text-muted mb-10 max-w-lg leading-relaxed">
@@ -13,8 +13,8 @@ export function InstallCta() {
         </p>
 
         <div className="flex flex-col gap-4">
-          <TerminalBlock command="npm install hiraki" label="npm.sh" className="w-full max-w-sm" />
-          <TerminalBlock command="pnpm add hiraki" label="pnpm.sh" className="w-full max-w-sm" />
+          <TerminalBlock command="npm install hiraki" label="npm.sh" className="w-full sm:max-w-sm" />
+          <TerminalBlock command="pnpm add hiraki" label="pnpm.sh" className="w-full sm:max-w-sm" />
         </div>
 
         <div className="flex items-center gap-4 mt-8">

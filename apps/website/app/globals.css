@@ -113,3 +113,26 @@ html.dark .shiki span {
 .shiki span {
   background-color: transparent !important;
 }
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface-elevated) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--surface-elevated);
+  border-radius: 9999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--text-dim);
+}
