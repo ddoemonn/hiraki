@@ -1,8 +1,15 @@
 {
   "name": "hiraki",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Zero-dependency React drawer component library — all 4 directions, velocity-aware gestures, snap points",
-  "keywords": ["react", "drawer", "bottom-sheet", "gesture", "animation", "accessible"],
+  "keywords": [
+    "react",
+    "drawer",
+    "bottom-sheet",
+    "gesture",
+    "animation",
+    "accessible"
+  ],
   "license": "MIT",
   "author": "Ozer Gokalp Sezer",
   "homepage": "https://hiraki.ozergklp.com",
