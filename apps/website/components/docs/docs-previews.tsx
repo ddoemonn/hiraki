@@ -99,28 +99,22 @@ export function SoftStylePreviewCard() {
               style={{ background: 'rgba(15, 23, 42, 0.28)', backdropFilter: 'blur(10px)' }}
             />
             <Drawer.Content
-              className={cn(
-                'border border-white/60 bg-white text-zinc-900 shadow-[0_-20px_60px_rgba(15,23,42,0.18)]',
-                'dark:border-white/10 dark:bg-zinc-50 dark:text-zinc-900',
-              )}
-              style={{ borderTopLeftRadius: 28, borderTopRightRadius: 28 }}
+              className="bg-white text-zinc-900 dark:bg-zinc-50 dark:text-zinc-900"
             >
-              <Drawer.Handle
-                className="mt-3"
-                style={{ backgroundColor: 'rgba(15, 23, 42, 0.18)' }}
-              />
+              <Drawer.Handle />
+
               <div className="space-y-5 p-6">
                 <div>
-                  <Drawer.Title className="text-lg font-semibold">Checkout summary</Drawer.Title>
+                  <Drawer.Title className="text-lg font-semibold">Preferences</Drawer.Title>
                   <Drawer.Description className="mt-1 text-sm text-zinc-600">
                     Soft, bright, product UI styling applied on top of headless behavior.
                   </Drawer.Description>
                 </div>
                 <div className="grid gap-3">
                   {[
-                    ['Plan', 'Starter'],
-                    ['Seats', '3'],
-                    ['Total', '$36/mo'],
+                    ['Language', 'English'],
+                    ['Theme', 'System'],
+                    ['Notifications', 'On'],
                   ].map(([label, value]) => (
                     <div
                       key={label}
@@ -132,18 +126,12 @@ export function SoftStylePreviewCard() {
                   ))}
                 </div>
                 <div className="flex gap-3">
-                  <button
-                    type="button"
-                    className="inline-flex items-center rounded-2xl bg-zinc-950 px-4 py-2 text-sm font-medium text-white"
-                  >
-                    Continue
-                  </button>
                   <Drawer.Close asChild>
                     <button
                       type="button"
-                      className="inline-flex items-center rounded-2xl border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700"
+                      className="inline-flex items-center rounded-2xl bg-zinc-950 px-4 py-2 text-sm font-medium text-white"
                     >
-                      Cancel
+                      Done
                     </button>
                   </Drawer.Close>
                 </div>
