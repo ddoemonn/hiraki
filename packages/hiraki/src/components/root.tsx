@@ -78,7 +78,7 @@ export function Root({
   snapPoints: snapPointsProp = [],
   activeSnapPoint: controlledSnap,
   onSnapPointChange,
-  closeThreshold = 0.5,
+  closeThreshold = 0.3,
   rubberBand = true,
   inertia = true,
   shouldScaleBackground = false,

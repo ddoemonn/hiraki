@@ -138,10 +138,11 @@ export function createGestureEngine(options: GestureEngineOptions) {
       return false
     }
     isDragging = false
-    const velocityPxMs = getVelocity() * 1000
+    const velocityPxMs = getVelocity()
+    const velocityPxSec = velocityPxMs * 1000
     const snapVelocityPxMs = -velocityPxMs
     const closeThresholdPx = opts.closeThreshold * opts.maxTranslate
-    const shouldClose = translateValue > closeThresholdPx
+    const shouldClose = translateValue > closeThresholdPx || velocityPxSec > 300
     let targetSnapIndex: number
     if (shouldClose) {
       targetSnapIndex = -1
@@ -153,7 +154,7 @@ export function createGestureEngine(options: GestureEngineOptions) {
         opts.inertia,
       )
     }
-    opts.onDragEnd?.({ translateValue, velocityPxMs, targetSnapIndex, shouldClose })
+    opts.onDragEnd?.({ translateValue, velocityPxMs: velocityPxSec, targetSnapIndex, shouldClose })
     return true
   }
 
