@@ -1,6 +1,6 @@
 {
   "name": "hiraki",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Zero-dependency React drawer component library — all 4 directions, velocity-aware gestures, snap points",
   "keywords": [
     "react",
@@ -39,7 +39,8 @@
     "./styles.css": "./dist/styles.css"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "scripts": {
     "build": "tsup",
