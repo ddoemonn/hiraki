@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Drawer } from 'hiraki'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/cn'
+import { CodeBadge } from '@/components/ui/code-badge'
 import type { Direction } from 'hiraki'
 
 const directions: { value: Direction; label: string; hint: string }[] = [
@@ -29,14 +30,14 @@ export function DirectionShowcase() {
         <p className="text-xs font-mono text-dim mb-2">direction</p>
         <h2 className="text-2xl font-bold text-fg mb-8">All 4 directions</h2>
 
-        <div className="flex flex-wrap gap-px border border-line w-fit">
+        <div className="flex flex-wrap gap-2">
           {directions.map((d) => (
             <button
               key={d.value}
               onClick={() => setActive(d.value)}
-              className="px-4 py-2 text-xs font-mono text-dim hover:text-fg hover:bg-raised border-r border-line last:border-r-0 transition-colors cursor-pointer bg-surface"
+              className="cursor-pointer"
             >
-              direction=&quot;{d.value}&quot;
+              <CodeBadge code={`direction="${d.value}"`} active={active === d.value} />
             </button>
           ))}
         </div>

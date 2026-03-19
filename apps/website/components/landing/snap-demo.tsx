@@ -2,8 +2,10 @@
 
 import { useState, useCallback } from 'react'
 import { Drawer } from 'hiraki'
+import type { SnapPoint } from 'hiraki'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/cn'
+import { CodeBadge } from '@/components/ui/code-badge'
 
 const snapConfigs = [
   {
@@ -23,7 +25,7 @@ const snapConfigs = [
   },
 ] as const
 
-type SnapPointInput = string | number
+type SnapPointInput = SnapPoint
 type SnapConfig = (typeof snapConfigs)[number]
 
 export function SnapDemo() {
@@ -43,10 +45,8 @@ export function SnapDemo() {
         <h2 className="text-2xl font-bold text-fg mb-4">Snap points</h2>
         <p className="text-sm text-muted max-w-lg mb-6 leading-relaxed">
           Pixels, percentages, or{' '}
-          <code className="font-mono text-xs bg-raised px-1.5 py-0.5 border border-line">
-            &quot;content&quot;
-          </code>{' '}
-          — velocity-aware. Flick fast to jump between snaps. Drag slowly to land precisely.
+          <CodeBadge code={'"content"'} compact className="align-[1px]" />{' '}
+          with velocity-aware behavior. Flick fast to jump between snaps. Drag slowly to land precisely.
         </p>
 
         <div className="flex flex-col gap-1 mb-8 font-mono text-xs text-dim">
@@ -58,12 +58,9 @@ export function SnapDemo() {
                 const pts = s.snapPoints as readonly SnapPointInput[]
                 setActiveSnap(pts.length - 1)
               }}
-              className={cn(
-                'px-3 py-2 border border-line bg-surface text-muted rounded-[16px] text-left transition-colors cursor-pointer',
-                'hover:bg-raised hover:text-fg',
-              )}
+              className="cursor-pointer text-left"
             >
-              {s.code}
+              <CodeBadge code={s.code} active={activeConfig === i} className="w-full justify-start px-5 py-3" />
             </button>
           ))}
         </div>
@@ -73,7 +70,7 @@ export function SnapDemo() {
             key={s.code}
             open={activeConfig === i}
             onOpenChange={(o) => !o && setActiveConfig(null)}
-            snapPoints={s.snapPoints as unknown as SnapPointInput[]}
+            snapPoints={s.snapPoints}
             activeSnapPoint={activeSnap}
             onSnapPointChange={handleSnap}
           >
@@ -102,14 +99,9 @@ export function SnapDemo() {
                       <button
                         key={j}
                         onClick={() => setActiveSnap(j)}
-                        className={cn(
-                          'px-3 py-1.5 text-xs font-mono border rounded-[16px] transition-all cursor-pointer',
-                          activeSnap === j
-                            ? 'border-fg/30 bg-raised text-fg'
-                            : 'border-line text-dim hover:text-muted',
-                        )}
+                        className="cursor-pointer"
                       >
-                        {String(sp)}
+                        <CodeBadge code={String(sp)} active={activeSnap === j} compact className="min-w-14 justify-center px-3 py-1.5" />
                       </button>
                     ))}
                   </div>
@@ -118,7 +110,7 @@ export function SnapDemo() {
 
                   <div className="flex flex-col gap-2 mt-2">
                     {Array.from({ length: 8 }).map((_, i) => (
-                      <div key={i} className="h-10 border border-line bg-raised rounded-[8px]" />
+                      <div key={i} className="h-10 border border-line bg-raised rounded-[var(--hiraki-radius)]" />
                     ))}
                   </div>
 

@@ -28,7 +28,7 @@ const VARIANT_CONFIGS: Record<Variant, VariantConfig> = {
   floating: {
     showHandle: true,
     margin: 12,
-    borderRadius: 20,
+    borderRadius: 16,
     fullWidth: false,
   },
   sheet: {
@@ -93,7 +93,10 @@ export function getContentStyle(
   }
 
   if (config.borderRadius != null) {
-    style.borderRadius = config.borderRadius
+    style.borderRadius =
+      config.borderRadius === 0
+        ? 0
+        : `var(--hiraki-radius, ${config.borderRadius}px)`
   }
 
   return style

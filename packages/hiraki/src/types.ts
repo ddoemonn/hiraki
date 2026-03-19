@@ -30,7 +30,7 @@ export interface DrawerRootProps {
   /** Whether clicking overlay / pressing Escape dismisses */
   dismissible?: boolean
   /** Snap points. Numbers = pixels from edge, strings = percentage of viewport */
-  snapPoints?: SnapPoint[]
+  snapPoints?: readonly SnapPoint[]
   /** Active snap index (controlled) */
   activeSnapPoint?: number
   onSnapPointChange?: (index: number) => void

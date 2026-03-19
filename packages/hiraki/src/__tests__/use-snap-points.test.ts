@@ -65,4 +65,13 @@ describe('useSnapPoints', () => {
     expect(result.current.snapEntries[1]?.index).toBe(1)
     expect(result.current.snapEntries[1]?.value).toBe(400)
   })
+
+  it('clamps active snap point to the available range', () => {
+    const { result } = renderHook(() =>
+      useSnapPoints({ snapPoints: [200, 400], viewportSize: 800, activeSnapPoint: 99 }),
+    )
+
+    expect(result.current.activeSnapIndex).toBe(1)
+    expect(result.current.translateForSnap(99, 500)).toBe(100)
+  })
 })

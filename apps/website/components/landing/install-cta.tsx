@@ -1,5 +1,5 @@
 import { Github, ExternalLink } from 'lucide-react'
-import { CopyButton } from '@/components/ui/copy-button'
+import { TerminalBlock } from '@/components/ui/terminal-block'
 
 export function InstallCta() {
   return (
@@ -13,33 +13,24 @@ export function InstallCta() {
         </p>
 
         <div className="flex flex-col gap-4">
-          <div className="flex items-center gap-0 border border-line bg-surface w-fit">
-            <span className="px-4 py-2.5 text-sm font-mono text-dim border-r border-line">npm</span>
-            <span className="px-4 py-2.5 text-sm font-mono text-muted">npm install hiraki</span>
-            <div className="border-l border-line">
-              <CopyButton text="npm install hiraki" />
-            </div>
-          </div>
-
-          <div className="flex items-center gap-0 border border-line bg-surface w-fit">
-            <span className="px-4 py-2.5 text-sm font-mono text-dim border-r border-line">pnpm</span>
-            <span className="px-4 py-2.5 text-sm font-mono text-muted">pnpm add hiraki</span>
-            <div className="border-l border-line">
-              <CopyButton text="pnpm add hiraki" />
-            </div>
-          </div>
+          <TerminalBlock command="npm install hiraki" label="npm.sh" className="w-full max-w-sm" />
+          <TerminalBlock command="pnpm add hiraki" label="pnpm.sh" className="w-full max-w-sm" />
         </div>
 
         <div className="flex items-center gap-4 mt-8">
           <a
-            href="https://github.com"
+            href="https://github.com/ozergokalpsezer/hiraki"
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex items-center gap-2 text-sm text-dim hover:text-muted transition-colors font-mono"
           >
             <Github className="w-4 h-4" />
             GitHub
           </a>
           <a
-            href="https://npmjs.com"
+            href="https://www.npmjs.com/package/hiraki"
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex items-center gap-2 text-sm text-dim hover:text-muted transition-colors font-mono"
           >
             <ExternalLink className="w-4 h-4" />
@@ -49,7 +40,7 @@ export function InstallCta() {
 
         <div className="mt-16 pt-8 border-t border-line">
           <p className="text-xs font-mono text-dim">
-            hiraki (開き) — React drawer component · MIT License
+            hiraki (開き), React drawer component · MIT License
           </p>
         </div>
       </div>

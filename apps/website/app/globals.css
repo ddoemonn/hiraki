@@ -1,24 +1,82 @@
 @import "tailwindcss";
 @source "../";
 
+:root {
+  --surface-base: #f7f7f8;
+  --surface-surface: #ffffff;
+  --surface-raised: #f3f4f6;
+  --surface-elevated: #d4d4d8;
+  --surface-line: #e4e4e7;
+
+  --text-fg: #09090b;
+  --text-muted: #52525b;
+  --text-dim: #71717a;
+  --text-accent: #09090b;
+  --text-accent-fg: #fafafa;
+
+  --theme-green: #16a34a;
+  --theme-green-bg: rgba(22, 163, 74, 0.12);
+
+  --code-bg: rgba(255, 255, 255, 0.92);
+  --code-bg-active: rgba(255, 255, 255, 1);
+  --code-border: rgba(9, 9, 11, 0.08);
+  --code-border-strong: rgba(9, 9, 11, 0.14);
+  --syntax-property: #0f766e;
+  --syntax-string: #15803d;
+  --syntax-number: #b45309;
+  --syntax-operator: #334155;
+  --syntax-punctuation: #94a3b8;
+  --syntax-plain: #111827;
+}
+
+.dark {
+  --surface-base: #09090b;
+  --surface-surface: #0f0f11;
+  --surface-raised: #18181b;
+  --surface-elevated: #27272a;
+  --surface-line: #27272a;
+
+  --text-fg: #fafafa;
+  --text-muted: #a1a1aa;
+  --text-dim: #71717a;
+  --text-accent: #f4f4f5;
+  --text-accent-fg: #09090b;
+
+  --theme-green: #4ade80;
+  --theme-green-bg: rgba(74, 222, 128, 0.1);
+
+  --code-bg: rgba(16, 16, 19, 0.94);
+  --code-bg-active: rgba(22, 22, 27, 1);
+  --code-border: rgba(255, 255, 255, 0.08);
+  --code-border-strong: rgba(255, 255, 255, 0.14);
+  --syntax-property: #7dd3fc;
+  --syntax-string: #86efac;
+  --syntax-number: #fdba74;
+  --syntax-operator: #d4d4d8;
+  --syntax-punctuation: #71717a;
+  --syntax-plain: #e5e7eb;
+}
+
 @theme {
-  --color-base: #09090b;
-  --color-surface: #0f0f11;
-  --color-raised: #18181b;
-  --color-elevated: #27272a;
-  --color-line: #27272a;
+  --color-base: var(--surface-base);
+  --color-surface: var(--surface-surface);
+  --color-raised: var(--surface-raised);
+  --color-elevated: var(--surface-elevated);
+  --color-line: var(--surface-line);
 
-  --color-fg: #fafafa;
-  --color-muted: #a1a1aa;
-  --color-dim: #71717a;
-  --color-accent: #f4f4f5;
-  --color-accent-fg: #09090b;
+  --color-fg: var(--text-fg);
+  --color-muted: var(--text-muted);
+  --color-dim: var(--text-dim);
+  --color-accent: var(--text-accent);
+  --color-accent-fg: var(--text-accent-fg);
 
-  --color-green: #4ade80;
-  --color-green-bg: rgba(74, 222, 128, 0.1);
+  --color-green: var(--theme-green);
+  --color-green-bg: var(--theme-green-bg);
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+
+  --hiraki-radius: 16px;
 }
 
 @layer base {
@@ -27,12 +85,31 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
-    background-color: #09090b;
-    color: #fafafa;
+    background-color: var(--color-base);
+    color: var(--color-fg);
     line-height: 1.6;
+    transition:
+      background-color 200ms ease,
+      color 200ms ease,
+      border-color 200ms ease;
   }
 
   body {
     font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   }
+}
+
+html:not(.dark) .shiki,
+html:not(.dark) .shiki span {
+  color: var(--shiki-light) !important;
+}
+
+html.dark .shiki,
+html.dark .shiki span {
+  color: var(--shiki-dark) !important;
+}
+
+.shiki,
+.shiki span {
+  background-color: transparent !important;
 }

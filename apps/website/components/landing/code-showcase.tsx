@@ -57,19 +57,19 @@ const directionExample = `{/* Opens from the right */}
 export function CodeShowcase() {
   return (
     <section className="w-full border-b border-line">
-      <div className="max-w-4xl mx-auto px-6 py-16">
+      <div className="max-w-6xl mx-auto px-6 py-16">
         <p className="text-xs font-mono text-dim mb-2">usage</p>
         <h2 className="text-2xl font-bold text-fg mb-4">Built for DX</h2>
         <p className="text-sm text-muted max-w-lg mb-10 leading-relaxed">
-          Compound component API — compose{' '}
+          Compound component API: compose{' '}
           <code className="font-mono text-xs bg-raised px-1.5 py-0.5 border border-line">Root</code>,{' '}
           <code className="font-mono text-xs bg-raised px-1.5 py-0.5 border border-line">Content</code>,{' '}
           <code className="font-mono text-xs bg-raised px-1.5 py-0.5 border border-line">Overlay</code>{' '}
           and add what you need. Nothing more.
         </p>
 
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="border border-line bg-surface rounded-[16px] overflow-hidden">
+        <div className="grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+          <div className="min-w-0 border border-line bg-surface rounded-[var(--hiraki-radius)] overflow-hidden">
             <div className="flex items-center justify-between px-4 py-2 border-b border-line bg-raised">
               <div className="flex items-center gap-2">
                 <div className="flex items-center gap-1.5">
@@ -84,8 +84,8 @@ export function CodeShowcase() {
             <CodeBlock code={basicExample} lang="tsx" />
           </div>
 
-          <div className="flex flex-col gap-6">
-            <div className="border border-line bg-surface rounded-[16px] overflow-hidden">
+          <div className="min-w-0 flex flex-col gap-6">
+            <div className="min-w-0 border border-line bg-surface rounded-[var(--hiraki-radius)] overflow-hidden">
               <div className="flex items-center justify-between px-4 py-2 border-b border-line bg-raised">
                 <div className="flex items-center gap-2">
                   <div className="flex items-center gap-1.5">
@@ -100,7 +100,7 @@ export function CodeShowcase() {
               <CodeBlock code={snapExample} lang="tsx" />
             </div>
 
-            <div className="border border-line bg-surface rounded-[16px] overflow-hidden">
+            <div className="min-w-0 border border-line bg-surface rounded-[var(--hiraki-radius)] overflow-hidden">
               <div className="flex items-center justify-between px-4 py-2 border-b border-line bg-raised">
                 <div className="flex items-center gap-2">
                   <div className="flex items-center gap-1.5">

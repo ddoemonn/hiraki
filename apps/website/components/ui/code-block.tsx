@@ -16,7 +16,11 @@ export async function CodeBlock({
 }: CodeBlockProps) {
   const html = await codeToHtml(code.trim(), {
     lang,
-    theme: 'vitesse-dark',
+    themes: {
+      light: 'vitesse-light',
+      dark: 'vitesse-dark',
+    },
+    defaultColor: false,
   })
 
   return (
@@ -32,7 +36,7 @@ export async function CodeBlock({
         </div>
       )}
       <div
-        className="[&_pre]:!bg-transparent [&_pre]:p-4 [&_pre]:overflow-x-auto [&_pre]:text-[13px] [&_pre]:leading-[1.7] [&_code]:font-mono"
+        className="[&_pre]:!bg-transparent [&_pre]:p-4 [&_pre]:overflow-x-auto [&_pre]:text-[12px] [&_pre]:leading-[1.7] md:[&_pre]:overflow-x-hidden md:[&_pre]:whitespace-pre-wrap md:[&_pre]:break-words md:[&_pre]:text-[13px] [&_code]:font-mono"
         dangerouslySetInnerHTML={{ __html: html }}
       />
     </div>

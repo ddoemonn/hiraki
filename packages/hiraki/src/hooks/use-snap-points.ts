@@ -4,7 +4,7 @@ import type { SnapPointEntry } from '../engine/physics'
 import { useControllableState } from './use-controllable-state'
 
 interface UseSnapPointsOptions {
-  snapPoints: SnapPoint[]
+  snapPoints: readonly SnapPoint[]
   viewportSize: number
   contentSize?: number
   activeSnapPoint?: number
@@ -34,7 +34,7 @@ export function useSnapPoints({
   activeSnapPoint,
   onSnapPointChange,
 }: UseSnapPointsOptions): UseSnapPointsReturn {
-  const [activeSnapIndex, setActiveSnapIndex] = useControllableState({
+  const [rawActiveSnapIndex, setRawActiveSnapIndex] = useControllableState({
     controlled: activeSnapPoint,
     defaultValue: snapPoints.length > 0 ? snapPoints.length - 1 : 0,
     onChange: onSnapPointChange,
@@ -53,14 +53,24 @@ export function useSnapPoints({
     [resolvedSnapPoints],
   )
 
+  const maxIndex = Math.max(resolvedSnapPoints.length - 1, 0)
+  const activeSnapIndex = Math.min(Math.max(rawActiveSnapIndex, 0), maxIndex)
+  const setActiveSnapIndex = useCallback(
+    (index: number) => {
+      setRawActiveSnapIndex(Math.min(Math.max(index, 0), maxIndex))
+    },
+    [maxIndex, setRawActiveSnapIndex],
+  )
+
   const activeSnapPx = resolvedSnapPoints[activeSnapIndex]?.value ?? viewportSize
 
   const translateForSnap = useCallback(
     (index: number, maxTranslate: number): number => {
-      const snapPx = resolvedSnapPoints[index]?.value ?? 0
+      const clampedIndex = Math.min(Math.max(index, 0), maxIndex)
+      const snapPx = resolvedSnapPoints[clampedIndex]?.value ?? 0
       return Math.max(0, maxTranslate - snapPx)
     },
-    [resolvedSnapPoints],
+    [maxIndex, resolvedSnapPoints],
   )
 
   return { resolvedSnapPoints, snapEntries, activeSnapIndex, setActiveSnapIndex, activeSnapPx, translateForSnap }

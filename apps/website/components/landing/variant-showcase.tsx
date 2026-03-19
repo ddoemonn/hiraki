@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Drawer } from 'hiraki'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/cn'
+import { CodeBadge } from '@/components/ui/code-badge'
 
 type Variant = 'default' | 'floating' | 'sheet'
 
@@ -22,14 +23,14 @@ export function VariantShowcase() {
         <p className="text-xs font-mono text-dim mb-2">variants</p>
         <h2 className="text-2xl font-bold text-fg mb-8">6 visual modes, one API</h2>
 
-        <div className="flex flex-wrap gap-px border border-line w-fit mb-6">
+        <div className="flex flex-wrap gap-2 mb-6">
           {variants.map((v) => (
             <button
               key={v.value}
               onClick={() => setActive(v.value)}
-              className="px-4 py-2 text-xs font-mono text-dim hover:text-fg hover:bg-raised border-r border-line last:border-r-0 transition-colors cursor-pointer bg-surface"
+              className="cursor-pointer"
             >
-              variant=&quot;{v.value}&quot;
+              <CodeBadge code={`variant="${v.value}"`} active={active === v.value} />
             </button>
           ))}
         </div>

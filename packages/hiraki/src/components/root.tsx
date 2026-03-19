@@ -24,10 +24,42 @@ import { getTransform } from '../animations/presets'
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
 const EXIT_DURATION = 300
+const INTERACTIVE_SELECTOR = [
+  'button',
+  'a[href]',
+  'input',
+  'select',
+  'textarea',
+  'summary',
+  '[role="button"]',
+  '[contenteditable="true"]',
+  '[data-hiraki-close]',
+  '[data-hiraki-trigger]',
+].join(', ')
 
 function getViewportSize(direction: Direction): number {
   if (typeof window === 'undefined') return 600
   return direction === 'left' || direction === 'right' ? window.innerWidth : window.innerHeight
+}
+
+function measureElementExtent(element: HTMLDivElement, direction: Direction): number {
+  return direction === 'left' || direction === 'right'
+    ? element.offsetWidth
+    : element.offsetHeight
+}
+
+function measureContentExtent(element: HTMLDivElement, direction: Direction): number {
+  return direction === 'left' || direction === 'right'
+    ? element.scrollWidth
+    : element.scrollHeight
+}
+
+function shouldIgnoreGestureTarget(target: EventTarget | null, container: Element): boolean {
+  if (!(target instanceof Element)) return false
+  if (target.closest('[data-hiraki-handle]')) return false
+
+  const interactiveTarget = target.closest(INTERACTIVE_SELECTOR)
+  return interactiveTarget !== null && container.contains(interactiveTarget)
 }
 
 export interface DrawerRootInternalProps extends DrawerRootProps {
@@ -60,6 +92,7 @@ export function Root({
     onChange: onOpenChange,
   })
   const [mounted, setMounted] = useState(false)
+  const [contentSize, setContentSize] = useState(0)
 
   const contentRef = useRef<HTMLDivElement | null>(null)
   const overlayRef = useRef<HTMLDivElement | null>(null)
@@ -69,6 +102,7 @@ export function Root({
   const maxTranslateRef = useRef(0)
   const isDraggingRef = useRef(false)
   const dragProgressRef = useRef(0)
+  const isEnteringRef = useRef(false)
 
   const titleId = useMemo(() => generateId('hiraki-title'), [])
   const descriptionId = useMemo(() => generateId('hiraki-desc'), [])
@@ -91,17 +125,10 @@ export function Root({
   } = useSnapPoints({
     snapPoints: snapPointsProp,
     viewportSize,
-    contentSize: contentRef.current?.scrollHeight,
+    contentSize,
     activeSnapPoint: controlledSnap,
     onSnapPointChange,
   })
-
-  function measureMaxTranslate() {
-    if (!contentRef.current) return 0
-    return direction === 'left' || direction === 'right'
-      ? contentRef.current.offsetWidth
-      : contentRef.current.offsetHeight
-  }
 
   function applyTranslate(value: number) {
     translateRef.current = value
@@ -142,6 +169,20 @@ export function Root({
     }
     return engineRef.current
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const updateMeasuredSizes = useCallback(() => {
+    const element = contentRef.current
+    if (!element) return 0
+
+    const nextMaxTranslate = measureElementExtent(element, direction)
+    const nextContentSize = measureContentExtent(element, direction)
+
+    maxTranslateRef.current = nextMaxTranslate
+    getEngine().update({ maxTranslate: nextMaxTranslate })
+    setContentSize((prev) => (prev === nextContentSize ? prev : nextContentSize))
+
+    return nextMaxTranslate
+  }, [direction, getEngine])
 
   const triggerClose = useCallback(() => {
     const mt = maxTranslateRef.current
@@ -221,26 +262,71 @@ export function Root({
   }, [open])
 
   useIsomorphicLayoutEffect(() => {
-    if (!mounted || !open || !contentRef.current) return
-    const mt = measureMaxTranslate()
-    if (mt === 0) return
-    maxTranslateRef.current = mt
-    getEngine().update({ maxTranslate: mt })
+    if (!mounted || !contentRef.current) return
 
+    const element = contentRef.current
+    updateMeasuredSizes()
+
+    if (typeof ResizeObserver === 'undefined') return
+
+    const observer = new ResizeObserver(() => {
+      updateMeasuredSizes()
+    })
+
+    observer.observe(element)
+    return () => observer.disconnect()
+  }, [mounted, updateMeasuredSizes])
+
+  useIsomorphicLayoutEffect(() => {
+    if (!mounted || !open || !contentRef.current) return
+    const mt = updateMeasuredSizes()
+    if (mt === 0) return
+
+    isEnteringRef.current = true
     applyTranslate(mt)
     getEngine().setTranslate(mt)
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
+    let firstFrame = 0
+    let secondFrame = 0
+    firstFrame = requestAnimationFrame(() => {
+      secondFrame = requestAnimationFrame(() => {
         if (!contentRef.current) return
         const targetTranslate = translateForSnap(activeSnapIndex, mt)
+        const progress = mt > 0 ? Math.max(0, 1 - targetTranslate / mt) : 0
         applyEnterTransition(contentRef.current)
         applyTranslate(targetTranslate)
         getEngine().setTranslate(targetTranslate)
-        applyProgress(1)
+        applyProgress(progress)
+        isEnteringRef.current = false
       })
     })
-  }, [mounted, open]) // eslint-disable-line react-hooks/exhaustive-deps
+
+    return () => {
+      cancelAnimationFrame(firstFrame)
+      cancelAnimationFrame(secondFrame)
+      isEnteringRef.current = false
+    }
+  }, [mounted, open, updateMeasuredSizes]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  useIsomorphicLayoutEffect(() => {
+    if (!mounted || !open || !contentRef.current) return
+    if (isDraggingRef.current || isEnteringRef.current) return
+
+    const mt = updateMeasuredSizes()
+    if (mt === 0) return
+
+    const targetTranslate = translateForSnap(activeSnapIndex, mt)
+    const distance = Math.abs(translateRef.current - targetTranslate)
+    const progress = mt > 0 ? Math.max(0, 1 - targetTranslate / mt) : 0
+
+    if (distance > 0.5) {
+      applySnapTransition(contentRef.current, 0, distance)
+      applyTranslate(targetTranslate)
+    }
+
+    getEngine().setTranslate(targetTranslate)
+    applyProgress(progress)
+  }, [activeSnapIndex, contentSize, mounted, open, translateForSnap, updateMeasuredSizes, viewportSize]) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!open || !contentRef.current) return
@@ -285,13 +371,29 @@ export function Root({
   const gestureHandlers: DrawerGestureHandlers = useMemo(
     () => ({
       onPointerDown: (e: React.PointerEvent) => {
+        if (shouldIgnoreGestureTarget(e.target, e.currentTarget)) return
         const engine = getEngine()
-        const started = engine.onPointerDown(e.nativeEvent)
-        if (started) (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
+        engine.onPointerDown(e.nativeEvent)
       },
-      onPointerMove: (e: React.PointerEvent) => getEngine().onPointerMove(e.nativeEvent),
-      onPointerUp: (e: React.PointerEvent) => getEngine().onPointerUp(e.nativeEvent),
-      onPointerCancel: (e: React.PointerEvent) => getEngine().onPointerUp(e.nativeEvent),
+      onPointerMove: (e: React.PointerEvent) => {
+        const engine = getEngine()
+        const handled = engine.onPointerMove(e.nativeEvent)
+        if (handled && engine.getIsDragging() && !e.currentTarget.hasPointerCapture(e.pointerId)) {
+          e.currentTarget.setPointerCapture(e.pointerId)
+        }
+      },
+      onPointerUp: (e: React.PointerEvent) => {
+        getEngine().onPointerUp(e.nativeEvent)
+        if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+          e.currentTarget.releasePointerCapture(e.pointerId)
+        }
+      },
+      onPointerCancel: (e: React.PointerEvent) => {
+        getEngine().onPointerUp(e.nativeEvent)
+        if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+          e.currentTarget.releasePointerCapture(e.pointerId)
+        }
+      },
     }),
     [getEngine],
   )
