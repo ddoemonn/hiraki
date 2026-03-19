@@ -1,6 +1,6 @@
 # hiraki
 
-Monorepo for [hiraki](https://github.com/ddoemonn/hiraki) — a zero-dependency React drawer component library.
+Monorepo for hiraki, a zero-dependency React drawer component library.
 
 ## Structure
 
