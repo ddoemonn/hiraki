@@ -19,7 +19,7 @@ export function InstallCta() {
 
         <div className="flex items-center gap-4 mt-8">
           <a
-            href="https://github.com/ozergokalpsezer/hiraki"
+            href="https://github.com/ddoemonn/hiraki"
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-2 text-sm text-dim hover:text-muted transition-colors font-mono"

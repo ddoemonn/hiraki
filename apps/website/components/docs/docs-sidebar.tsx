@@ -58,7 +58,7 @@ export function DocsSidebar() {
 
       <div className="mt-6 hidden gap-3 border-t border-line pt-4 lg:grid">
         <a
-          href="https://github.com/ozergokalpsezer/hiraki"
+          href="https://github.com/ddoemonn/hiraki"
           target="_blank"
           rel="noreferrer"
           className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-fg"

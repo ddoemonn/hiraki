@@ -25,7 +25,7 @@ export function HeroDemo() {
           Docs
         </Link>
         <a
-          href="https://github.com/ozergokalpsezer/hiraki"
+          href="https://github.com/ddoemonn/hiraki"
           target="_blank"
           rel="noreferrer"
           className="inline-flex h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-[var(--hiraki-radius)] px-5 text-sm font-medium text-muted transition-colors hover:text-fg"
