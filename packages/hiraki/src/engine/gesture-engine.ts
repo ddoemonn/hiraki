@@ -30,15 +30,13 @@ function getDirectionSign(direction: Direction): number {
   return direction === 'top' || direction === 'left' ? -1 : 1
 }
 
-export function shouldDrag(
-  target: EventTarget | null,
-  direction: Direction,
-): boolean {
+export function shouldDrag(target: EventTarget | null, direction: Direction): boolean {
   if (!(target instanceof Element)) return true
   const horizontal = isHorizontal(direction)
   const scrollParent = getScrollParent(target, horizontal)
   if (!scrollParent) return true
-  const { scrollTop, scrollLeft, scrollHeight, scrollWidth, clientHeight, clientWidth } = scrollParent
+  const { scrollTop, scrollLeft, scrollHeight, scrollWidth, clientHeight, clientWidth } =
+    scrollParent
   if (horizontal) {
     return direction === 'right' ? scrollLeft <= 0 : scrollLeft + clientWidth >= scrollWidth - 1
   }
@@ -138,22 +136,54 @@ export function createGestureEngine(options: GestureEngineOptions) {
       return false
     }
     isDragging = false
-    const velocityPxMs = getVelocity()
+
+    const smoothedVelocityPxMs = getVelocity()
+    const trackerState = tracker.getState()
+    const totalDelta = isHorizontal(opts.direction) ? Math.abs(trackerState.deltaX) : Math.abs(trackerState.deltaY)
+    const totalTime = trackerState.timestamp - trackerState.startTimestamp
+    const avgVelocityPxMs = totalTime > 0 ? totalDelta / totalTime : 0
+    const velocityPxMs = Math.abs(smoothedVelocityPxMs) > avgVelocityPxMs
+      ? smoothedVelocityPxMs
+      : avgVelocityPxMs * (smoothedVelocityPxMs >= 0 ? 1 : -1)
     const velocityPxSec = velocityPxMs * 1000
-    const snapVelocityPxMs = -velocityPxMs
+    const dragDelta = translateValue - dragStartTranslate
+    const isDraggingTowardClose = dragDelta > 0
     const closeThresholdPx = opts.closeThreshold * opts.maxTranslate
-    const shouldClose = translateValue > closeThresholdPx || velocityPxSec > 300
+    const snapPoints = opts.snapPoints
+
+    let shouldClose = false
     let targetSnapIndex: number
-    if (shouldClose) {
+
+    if (velocityPxMs > 2 && isDraggingTowardClose) {
+      shouldClose = true
       targetSnapIndex = -1
+    } else if (velocityPxMs < -2) {
+      shouldClose = false
+      targetSnapIndex = snapPoints[snapPoints.length - 1]?.index ?? 0
+    } else if (Math.abs(velocityPxMs) > 0.4 && Math.abs(dragDelta) < opts.maxTranslate * 0.4) {
+      const stepDir = isDraggingTowardClose ? -1 : 1
+      const nextIndex = opts.activeSnapIndex + stepDir
+      if (nextIndex < 0) {
+        shouldClose = true
+        targetSnapIndex = -1
+      } else {
+        shouldClose = false
+        targetSnapIndex = Math.min(nextIndex, snapPoints.length - 1)
+      }
     } else {
-      targetSnapIndex = findNearestSnapPoint(
-        opts.maxTranslate - translateValue,
-        snapVelocityPxMs,
-        opts.snapPoints,
-        opts.inertia,
-      )
+      shouldClose = translateValue > closeThresholdPx
+      if (shouldClose) {
+        targetSnapIndex = -1
+      } else {
+        targetSnapIndex = findNearestSnapPoint(
+          opts.maxTranslate - translateValue,
+          -velocityPxMs,
+          snapPoints,
+          opts.inertia,
+        )
+      }
     }
+
     opts.onDragEnd?.({ translateValue, velocityPxMs: velocityPxSec, targetSnapIndex, shouldClose })
     return true
   }
@@ -170,7 +200,15 @@ export function createGestureEngine(options: GestureEngineOptions) {
     return translateValue
   }
 
-  return { update, onPointerDown, onPointerMove, onPointerUp, setTranslate, getIsDragging, getTranslate }
+  return {
+    update,
+    onPointerDown,
+    onPointerMove,
+    onPointerUp,
+    setTranslate,
+    getIsDragging,
+    getTranslate,
+  }
 }
 
 export type GestureEngine = ReturnType<typeof createGestureEngine>
