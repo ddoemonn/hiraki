@@ -9,7 +9,7 @@ const description =
 
 // Bump `?v=` to force Twitter/X and other caches to refetch the OG image.
 const ogImage = {
-  url: '/og?v=4',
+  url: '/og?v=5',
   width: 1200,
   height: 630,
   alt: 'hiraki, an accessible zero-dependency React drawer',
