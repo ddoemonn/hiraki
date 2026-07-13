@@ -16,13 +16,13 @@ const ogImage = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://hiraki.ozergklp.com'),
+  metadataBase: new URL('https://hiraki.ozzyx.xyz'),
   title: 'hiraki',
   description,
   openGraph: {
     title: 'hiraki',
     description,
-    url: 'https://hiraki.ozergklp.com',
+    url: 'https://hiraki.ozzyx.xyz',
     siteName: 'hiraki',
     images: [ogImage],
     type: 'website',
