@@ -76,7 +76,10 @@
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
 
-  --hiraki-radius: 16px;
+  /* Minimal, less-rounded radius scale */
+  --hiraki-radius: 8px;
+  --radius-sm: 6px;
+  --radius-xs: 4px;
 }
 
 @layer base {
@@ -97,6 +100,82 @@
   body {
     font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+}
+
+/* Flush-left mono eyebrow label used across sections */
+.eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+/* Calm, Fumadocs-like documentation prose */
+.prose-docs {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+.prose-docs > :first-child {
+  margin-top: 0;
+}
+.prose-docs h2 {
+  color: var(--text-fg);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+.prose-docs h3 {
+  color: var(--text-fg);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+.prose-docs p {
+  margin: 0.85rem 0;
+}
+.prose-docs ul {
+  margin: 0.85rem 0;
+  padding-left: 1.15rem;
+  list-style: disc;
+}
+.prose-docs li {
+  margin: 0.3rem 0;
+}
+.prose-docs li::marker {
+  color: var(--text-dim);
+}
+.prose-docs a {
+  color: var(--text-fg);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--surface-elevated);
+  transition: text-decoration-color 150ms ease;
+}
+.prose-docs a:hover {
+  text-decoration-color: var(--text-fg);
+}
+.prose-docs strong {
+  color: var(--text-fg);
+  font-weight: 600;
+}
+.prose-docs :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--surface-raised);
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-xs);
+  padding: 0.1em 0.35em;
 }
 
 html:not(.dark) .shiki,

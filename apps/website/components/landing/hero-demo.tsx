@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Github, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+import { GithubIcon } from '@/components/ui/icons'
 import { Drawer } from 'hiraki'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/cn'
@@ -31,7 +32,7 @@ export function HeroDemo() {
           className="inline-flex h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-[var(--hiraki-radius)] px-5 text-sm font-medium text-muted transition-colors hover:text-fg"
           style={{ border: '1px solid var(--code-border-strong)', background: 'var(--code-bg)', boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05)' }}
         >
-          <Github className="w-4 h-4" />
+          <GithubIcon className="w-4 h-4" />
           GitHub
         </a>
       </div>

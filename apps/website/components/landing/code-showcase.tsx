@@ -71,14 +71,7 @@ export function CodeShowcase() {
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
           <div className="min-w-0 border border-line bg-surface rounded-[var(--hiraki-radius)] overflow-hidden">
             <div className="flex items-center justify-between px-4 py-2 border-b border-line bg-raised">
-              <div className="flex items-center gap-2">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-[#ff5f57]" />
-                  <span className="w-2 h-2 rounded-full bg-[#febc2e]" />
-                  <span className="w-2 h-2 rounded-full bg-[#28c840]" />
-                </div>
-                <span className="text-xs font-mono text-dim ml-2">basic.tsx</span>
-              </div>
+              <span className="text-xs font-mono text-dim">basic.tsx</span>
               <CopyButton text={basicExample} />
             </div>
             <CodeBlock code={basicExample} lang="tsx" />
@@ -87,14 +80,7 @@ export function CodeShowcase() {
           <div className="min-w-0 flex flex-col gap-6">
             <div className="min-w-0 border border-line bg-surface rounded-[var(--hiraki-radius)] overflow-hidden">
               <div className="flex items-center justify-between px-4 py-2 border-b border-line bg-raised">
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-[#ff5f57]" />
-                    <span className="w-2 h-2 rounded-full bg-[#febc2e]" />
-                    <span className="w-2 h-2 rounded-full bg-[#28c840]" />
-                  </div>
-                  <span className="text-xs font-mono text-dim ml-2">snap-points.tsx</span>
-                </div>
+                <span className="text-xs font-mono text-dim">snap-points.tsx</span>
                 <CopyButton text={snapExample} />
               </div>
               <CodeBlock code={snapExample} lang="tsx" />
@@ -102,14 +88,7 @@ export function CodeShowcase() {
 
             <div className="min-w-0 border border-line bg-surface rounded-[var(--hiraki-radius)] overflow-hidden">
               <div className="flex items-center justify-between px-4 py-2 border-b border-line bg-raised">
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-[#ff5f57]" />
-                    <span className="w-2 h-2 rounded-full bg-[#febc2e]" />
-                    <span className="w-2 h-2 rounded-full bg-[#28c840]" />
-                  </div>
-                  <span className="text-xs font-mono text-dim ml-2">direction.tsx</span>
-                </div>
+                <span className="text-xs font-mono text-dim">direction.tsx</span>
                 <CopyButton text={directionExample} />
               </div>
               <CodeBlock code={directionExample} lang="tsx" />

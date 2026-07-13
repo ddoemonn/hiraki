@@ -1,4 +1,5 @@
-import { Github, ExternalLink } from 'lucide-react'
+import { ExternalLink } from 'lucide-react'
+import { GithubIcon } from '@/components/ui/icons'
 import { TerminalBlock } from '@/components/ui/terminal-block'
 
 export function InstallCta() {
@@ -24,7 +25,7 @@ export function InstallCta() {
             rel="noreferrer"
             className="inline-flex items-center gap-2 text-sm text-dim hover:text-muted transition-colors font-mono"
           >
-            <Github className="w-4 h-4" />
+            <GithubIcon className="w-4 h-4" />
             GitHub
           </a>
           <a

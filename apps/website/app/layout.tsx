@@ -4,25 +4,34 @@ import { GeistMono } from 'geist/font/mono'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import './globals.css'
 
+const description =
+  'The most capable React drawer component. All 4 directions, velocity-aware gestures, snap points, zero dependencies.'
+
+// Bump `?v=` to force Twitter/X and other caches to refetch the OG image.
+const ogImage = {
+  url: '/og?v=3',
+  width: 1200,
+  height: 630,
+  alt: 'hiraki — accessible, zero-dependency React drawer primitives',
+}
+
 export const metadata: Metadata = {
+  metadataBase: new URL('https://hiraki.ozergklp.com'),
   title: 'hiraki',
-  description:
-    'The most capable React drawer component. All 4 directions, velocity-aware gestures, snap points, zero dependencies.',
+  description,
   openGraph: {
     title: 'hiraki',
-    description:
-      'The most capable React drawer component. All 4 directions, velocity-aware gestures, snap points, zero dependencies.',
+    description,
     url: 'https://hiraki.ozergklp.com',
     siteName: 'hiraki',
-    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+    images: [ogImage],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'hiraki',
-    description:
-      'The most capable React drawer component. All 4 directions, velocity-aware gestures, snap points, zero dependencies.',
-    images: ['/og-image.png'],
+    description,
+    images: [ogImage],
   },
 }
 

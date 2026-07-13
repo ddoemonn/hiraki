@@ -99,11 +99,8 @@ export function CodeBadge({ code, active = false, compact = false, className }: 
   return (
     <span
       className={cn(
-        'inline-flex max-w-full items-center overflow-hidden rounded-[var(--hiraki-radius)]',
-        'transition-colors duration-200',
-        active
-          ? 'shadow-[0_8px_20px_rgba(0,0,0,0.06)]'
-          : 'hover:shadow-[0_6px_16px_rgba(0,0,0,0.04)]',
+        'inline-flex max-w-full items-center overflow-hidden rounded-[var(--radius-sm)]',
+        'transition-colors duration-150',
         compact ? 'px-2 py-0.5 text-xs' : 'px-4 py-2 text-xs',
         'font-mono leading-none',
         className,
@@ -111,9 +108,6 @@ export function CodeBadge({ code, active = false, compact = false, className }: 
       style={{
         border: `1px solid ${active ? 'var(--code-border-strong)' : 'var(--code-border)'}`,
         background: active ? 'var(--code-bg-active)' : 'var(--code-bg)',
-        boxShadow: active
-          ? 'inset 0 1px 0 rgba(255,255,255,0.05), 0 0 0 1px rgba(255,255,255,0.02)'
-          : 'inset 0 1px 0 rgba(255,255,255,0.03)',
       }}
     >
       {tokens.map((token, index) => (

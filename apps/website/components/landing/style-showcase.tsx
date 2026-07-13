@@ -1,4 +1,4 @@
-import { EditorialStylePreviewCard } from '@/components/docs/docs-previews'
+import { EditorialDrawerDemo } from '@/components/docs/docs-previews'
 import { editorialStyleExample } from '@/components/docs/docs-content'
 import { CodeBadge } from '@/components/ui/code-badge'
 import { CodeBlock } from '@/components/ui/code-block'
@@ -25,7 +25,7 @@ export async function StyleShowcase() {
 
         <div className="grid gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] xl:items-start">
           <div className="min-w-0">
-            <EditorialStylePreviewCard />
+            <EditorialDrawerDemo />
           </div>
 
           <div className="min-w-0">

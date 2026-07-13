@@ -26,13 +26,8 @@ export async function CodeBlock({
   return (
     <div className={className}>
       {filename && (
-        <div className="flex items-center gap-2 px-4 py-2 border-b border-line bg-raised">
-          <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-[#ff5f57]" />
-            <span className="w-2 h-2 rounded-full bg-[#febc2e]" />
-            <span className="w-2 h-2 rounded-full bg-[#28c840]" />
-          </div>
-          <span className="text-xs font-mono text-dim ml-2">{filename}</span>
+        <div className="flex items-center px-4 py-2 border-b border-line bg-raised">
+          <span className="text-xs font-mono text-dim">{filename}</span>
         </div>
       )}
       <div
